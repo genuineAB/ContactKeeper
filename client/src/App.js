@@ -12,34 +12,26 @@ import AuthState from './context/auth/AuthState';
 import Login from './components/auth/Login';
 import Alerts from './components/layout/Alerts';
 import AlertState from './context/alert/AlertState';
+import Pages from './pages';
 
 
 if(localStorage.token){
   setAuthToken(localStorage.token)
 };
  const App = () => {
+// return <Pages />
+
   return (
     <AuthState>
       
       <ContactState>
         <AlertState>
-          <Router>
             <Fragment>
-              <Navbar />
               <div className='container'>
                 <Alerts />
-                <Routes>
-                  <Route exact path='/' element={<PrivateRoute />} >
-                    <Route exact path='/' element={<Home />} />
-                  </Route>
-                  <Route exact path='/about' element={<About />} />
-                  <Route exact path='/register' element={<Register />} />
-                  <Route exact path='/login' element={<Login />} />
-
-                </Routes>
+                <Pages />
               </div>
             </Fragment>
-          </Router>
         </AlertState>
       </ContactState>
       

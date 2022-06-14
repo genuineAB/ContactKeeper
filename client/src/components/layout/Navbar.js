@@ -1,6 +1,6 @@
 import React, {Fragment, useContext} from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import AuthContext from '../../context/auth/AuthContext';
 import ContactContext from '../../context/contacts/ContactContext';
 
@@ -18,7 +18,7 @@ const Navbar = ({title, icon}) => {
     clearContacts();
   }
 
-  const authLinks = (
+  const authNavLinks = (
     <Fragment>
       <li>Hello {user && user.name}</li>
       <li>
@@ -29,12 +29,12 @@ const Navbar = ({title, icon}) => {
     </Fragment>
   );
 
-  const guestLinks = (
+  const guestNavLinks = (
     <Fragment>
         <li>
-            <Link to='/register'>Register</Link>
+            <NavLink to='/register'>Register</NavLink>
         </li><li>
-            <Link to='/login'>Login</Link>
+            <NavLink to='/login'>Login</NavLink>
         </li>
 
     </Fragment>
@@ -49,7 +49,7 @@ const Navbar = ({title, icon}) => {
         <i className={icon} /> {title}
       </h1>
       <ul>
-        {isAuthenticated ? authLinks: guestLinks}
+        {isAuthenticated ? authNavLinks: guestNavLinks}
       </ul>
     </div>
   ) 

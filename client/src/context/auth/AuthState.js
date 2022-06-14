@@ -30,6 +30,7 @@ const AuthState = props => {
     //Load User
     const loadUser = async () => {
         if(localStorage.token){
+            console.log("token", localStorage.token)
             setAuthToken(localStorage.token);
         }
 
@@ -42,8 +43,10 @@ const AuthState = props => {
                 payload:res.data
             })
         } catch (error) {
+            const err = error.response
+            console.log(err)
             dispatch({
-                // type: AUTH_ERROR
+                type: AUTH_ERROR
             })
         }
     }
@@ -79,12 +82,14 @@ const AuthState = props => {
         }
         try {
             const res = await axios.post('/api/auth', formData, config);
-
+console.log('token----', res.data);
+            localStorage.setItem('token', res.data.token);
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: res.data
             })
             loadUser();
+            formData.navigate("/");
         } catch (error) {
             
             dispatch({
